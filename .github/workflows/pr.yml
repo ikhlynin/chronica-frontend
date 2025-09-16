@@ -1,0 +1,23 @@
+name: PR
+
+on:
+  pull_request:
+    branches: [ "ikhlynin/main" ]
+
+jobs:
+  biome-lint:
+    name: Run Biome Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run Biome lint
+        run: yarn biome check .
