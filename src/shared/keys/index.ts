@@ -1,0 +1,6 @@
+export enum ROUTER_KEYS {
+	ALL_MATCH = "/*",
+	LOGIN = "/login",
+	SIGNUP = "/signup",
+	FEED = "/feed",
+}
