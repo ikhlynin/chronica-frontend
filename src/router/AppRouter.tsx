@@ -1,0 +1,14 @@
+import { Header, useAuthStore } from "virtual:modules";
+import type React from "react";
+import { privateRoutes, publicRoutes } from "./Routes";
+
+export const AppRouter: React.FC = () => {
+	const { isAuth } = useAuthStore();
+
+	return (
+		<div className="flex flex-col min-h-screen">
+			<Header />
+			<main className="flex-1">{isAuth ? privateRoutes : publicRoutes}</main>
+		</div>
+	);
+};

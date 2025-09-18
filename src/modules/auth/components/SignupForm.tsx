@@ -1,7 +1,7 @@
+import { InputField, SubmitButton } from "virtual:modules";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { InputField, SubmitButton } from "@/shared/components";
 
 const signupSchema = z.object({
 	email: z.string().email("Invalid email"),

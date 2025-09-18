@@ -3,4 +3,5 @@ export enum ROUTER_KEYS {
 	LOGIN = "/login",
 	SIGNUP = "/signup",
 	FEED = "/feed",
+	NEWS = "/news/:id",
 }
