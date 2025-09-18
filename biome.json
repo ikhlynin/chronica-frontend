@@ -4,7 +4,6 @@
 	"linter": { "enabled": true, "rules": { "recommended": true } },
 	"files": { "includes": ["src/**/*.{ts,tsx,js,jsx}"] },
 	"assist": {
-		"enabled": true,
 		"actions": {
 			"source": {
 				"organizeImports": "on"

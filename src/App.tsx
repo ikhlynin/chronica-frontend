@@ -1,11 +1,9 @@
-import { AppRoutes } from "@/router/AppRoutes";
-import { Header } from "@/shared/components";
+import { AppRouter } from "./router/AppRouter";
 
 const App = () => {
 	return (
 		<div className="flex flex-col min-h-screen">
-			<Header />
-			<AppRoutes />
+			<AppRouter />
 		</div>
 	);
 };

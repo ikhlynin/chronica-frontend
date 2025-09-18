@@ -1,10 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import InputField from "@shared/components/InputField";
+import SubmitButton from "@shared/components/SubmitButton";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { InputField, SubmitButton } from "@/shared/components";
 
 const signupSchema = z.object({
-	email: z.string().email("Invalid email"),
+	email: z.email("Invalid email"),
 	name: z.string().min(3, "At least 3 characters"),
 	password: z.string().min(3, "At least 3 characters"),
 });

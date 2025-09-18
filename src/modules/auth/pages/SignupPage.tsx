@@ -1,8 +1,14 @@
-import { AuthSwitch, SignupForm } from "virtual:modules";
+import AuthSwitch from "../components/AuthSwitch";
+import SignupForm from "../components/SignupForm";
 
 const RegisterPage = () => {
 	return (
-		<div className="min-h-screen flex flex-col justify-center items-center bg-gray-50">
+		<div
+			className="
+				min-h-screen flex flex-col 
+				justify-center items-center bg-gray-50
+			"
+		>
 			<SignupForm />
 			<AuthSwitch isLogin={false} />
 		</div>

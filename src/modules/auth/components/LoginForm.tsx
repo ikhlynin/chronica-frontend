@@ -1,12 +1,13 @@
-import { authService } from "virtual:modules";
 import { zodResolver } from "@hookform/resolvers/zod";
+import InputField from "@shared/components/InputField";
+import SubmitButton from "@shared/components/SubmitButton";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import { InputField, SubmitButton } from "@/shared/components";
+import { authService } from "../auth.service";
 
 const loginSchema = z.object({
-	email: z.string().email("Invalid email"),
+	email: z.email("Invalid email"),
 	password: z.string().min(3, "At least 3 characters"),
 });
 
