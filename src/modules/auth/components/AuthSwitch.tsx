@@ -1,5 +1,8 @@
-import type { AuthSwitchProps } from "virtual:modules";
 import { Link } from "react-router-dom";
+
+interface AuthSwitchProps {
+	isLogin: boolean;
+}
 
 const AuthSwitch = ({ isLogin }: AuthSwitchProps) => {
 	return (

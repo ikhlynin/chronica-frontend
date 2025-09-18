@@ -1,4 +1,4 @@
-import { useFeedStore } from "virtual:modules";
+import { useFeedStore } from "@modules/feed/feed.store";
 import { useNavigate, useParams } from "react-router-dom";
 
 const NewsPage = () => {

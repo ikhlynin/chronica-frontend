@@ -1,6 +1,8 @@
-import { FeedList, feedService, useFeedStore } from "virtual:modules";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
+import FeedList from "../components/FeedList";
+import { feedService } from "../feed.service";
+import { useFeedStore } from "../feed.store";
 
 const FeedPage = () => {
 	const { setItems } = useFeedStore();

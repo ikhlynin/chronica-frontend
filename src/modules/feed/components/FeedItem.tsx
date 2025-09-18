@@ -1,6 +1,6 @@
-import type { FeedItemType } from "virtual:modules";
-import { feedService } from "virtual:modules";
 import { Link } from "react-router-dom";
+import { feedService } from "../feed.service";
+import type { FeedItemType } from "../feed.types";
 
 interface FeedItemProps {
 	item: FeedItemType;

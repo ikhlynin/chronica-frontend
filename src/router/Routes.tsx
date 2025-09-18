@@ -1,10 +1,8 @@
-import {
-	FeedPage,
-	LoginPage,
-	NewsPage,
-	ROUTER_KEYS,
-	SignupPage,
-} from "virtual:modules";
+import LoginPage from "@modules/auth/pages/LoginPage";
+import SignupPage from "@modules/auth/pages/SignupPage";
+import FeedPage from "@modules/feed/page/FeedPage";
+import NewsPage from "@modules/news/page/NewsPage";
+import { ROUTER_KEYS } from "@shared/keys/keys";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 export const publicRoutes = (

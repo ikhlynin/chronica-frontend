@@ -1,4 +1,4 @@
-import { authService } from "virtual:modules";
+import { authService } from "@modules/auth/auth.service";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

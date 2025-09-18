@@ -1,4 +1,5 @@
-import { AuthSwitch, LoginForm } from "virtual:modules";
+import AuthSwitch from "../components/AuthSwitch";
+import LoginForm from "../components/LoginForm";
 
 const LoginPage = () => {
 	return (

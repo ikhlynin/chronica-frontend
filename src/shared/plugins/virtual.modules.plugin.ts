@@ -1,30 +1,36 @@
+import fs from "node:fs";
+import path from "node:path";
 import type { Plugin } from "vite";
 
-const modules: Record<string, string> = {
-	auth: "/src/modules/auth/index",
-	feed: "/src/modules/feed/index",
-	news: "/src/modules/news/index",
-	shared: "/src/shared/index",
+const modules: string[] = [""];
+
+const generateModuleImports = (modules: string[]) => {
+	if (!modules || modules.length === 0) return "";
+
+	const filtered = modules.filter((mod) => {
+		if (!mod) return false;
+		const fullPath = path.resolve(process.cwd(), mod);
+		return fs.existsSync(fullPath);
+	});
+	if (filtered.length === 0) return "";
+
+	return modules.map((mod) => `import "${mod}";`).join("\n");
 };
 
-function virtualModules(): Plugin {
-	const virtualModuleId = "virtual:modules";
-	const resolvedVirtualModuleId = `\0${virtualModuleId}`;
-
+const virtualModules = (): Plugin => {
 	return {
 		name: "virtual-modules",
+
 		resolveId(id: string) {
-			if (id === virtualModuleId) {
-				return resolvedVirtualModuleId;
-			}
+			return id === "virtual:modules" ? id : null;
 		},
+
 		load(id: string) {
-			if (id === resolvedVirtualModuleId) {
-				return Object.values(modules)
-					.map((path) => `export * from "${path}";`)
-					.join("\n");
+			if (id === "virtual:modules") {
+				return generateModuleImports(modules);
 			}
+			return null;
 		},
 	};
-}
+};
 export default virtualModules;

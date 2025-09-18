@@ -1,4 +1,4 @@
-import { useAuthStore } from "virtual:modules";
+import { useAuthStore } from "./auth.store";
 
 class AuthService {
 	async login(_email: string, _password: string): Promise<string> {

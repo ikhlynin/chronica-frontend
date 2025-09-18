@@ -1,4 +1,5 @@
-import { FeedItem, useFeedStore } from "virtual:modules";
+import { useFeedStore } from "../feed.store";
+import FeedItem from "./FeedItem";
 
 const FeedList = () => {
 	const { items } = useFeedStore();

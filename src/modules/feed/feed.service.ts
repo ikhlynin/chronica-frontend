@@ -1,4 +1,4 @@
-import type { FeedItemType } from "virtual:modules";
+import type { FeedItemType } from "./feed.types";
 
 const mockFeed: FeedItemType[] = [
 	{
@@ -30,7 +30,8 @@ class FeedService {
 
 	getShortDescription(text: string, maxLength = 120) {
 		if (text.length <= maxLength) return text;
-		return text.slice(0, maxLength).trimEnd() + "...";
+
+		return `${text.slice(0, maxLength).trimEnd()}...`;
 	}
 }
 

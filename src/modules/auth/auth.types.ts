@@ -10,7 +10,3 @@ export interface AuthState {
 	setAccessToken: (accessToken: string) => void;
 	logout: () => void;
 }
-
-export interface AuthSwitchProps {
-	isLogin: boolean;
-}

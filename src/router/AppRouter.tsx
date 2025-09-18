@@ -1,4 +1,5 @@
-import { Header, useAuthStore } from "virtual:modules";
+import { useAuthStore } from "@modules/auth/auth.store";
+import Header from "@shared/components/header/Header";
 import type React from "react";
 import { privateRoutes, publicRoutes } from "./Routes";
 

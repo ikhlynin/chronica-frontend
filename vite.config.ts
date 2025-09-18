@@ -8,7 +8,9 @@ export default defineConfig({
 	plugins: [react(), tailwindcss(), virtualModules()],
 	resolve: {
 		alias: {
-			"@": path.resolve(__dirname, "src"),
+			"src": path.resolve(__dirname, "src"),
+      "@modules" : path.resolve(__dirname, "src/modules"),
+      "@shared": path.resolve(__dirname, "src/shared")
 		},
 	},
 	build: {
