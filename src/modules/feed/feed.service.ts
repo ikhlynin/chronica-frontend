@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import type { FeedItemType } from "./feed.types";
 
 const mockFeed: FeedItemType[] = [
@@ -32,6 +33,15 @@ class FeedService {
 		if (text.length <= maxLength) return text;
 
 		return `${text.slice(0, maxLength).trimEnd()}...`;
+	}
+
+	useFeedQuery() {
+		return useQuery<FeedItemType[]>({
+			queryKey: ["feed"],
+			queryFn: () => this.getFeed(),
+			staleTime: 1000 * 60 * 5,
+			retry: 3,
+		});
 	}
 }
 

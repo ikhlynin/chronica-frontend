@@ -7,6 +7,11 @@ class AuthService {
 		return accessToken;
 	}
 
+	async signup(email: string, name: string, password: string): Promise<string> {
+		console.log("test");
+		return email + name + password;
+	}
+
 	async refresh(): Promise<string> {
 		const accessToken = this.generateMockToken("refresh");
 		useAuthStore.getState().setAccessToken(accessToken);
