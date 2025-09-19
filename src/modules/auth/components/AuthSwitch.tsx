@@ -1,28 +1,37 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import AuthForm from "./AuthForm";
 
-interface AuthSwitchProps {
-	isLogin: boolean;
-}
-
-const AuthSwitch = ({ isLogin }: AuthSwitchProps) => {
+const AuthSwitch = () => {
+	const [isLoginMode, setIsLoginMode] = useState(true);
 	return (
-		<p className="text-sm text-center mt-4">
-			{isLogin ? (
-				<>
-					Don’t have an account?{" "}
-					<Link to="/signup" className="text-blue-500 hover:underline">
-						Sign up
-					</Link>
-				</>
-			) : (
-				<>
-					Have an account?{" "}
-					<Link to="/login" className="text-blue-500 hover:underline">
-						Log In
-					</Link>
-				</>
-			)}
-		</p>
+		<div>
+			<AuthForm isLogin={isLoginMode} />
+			<p className="text-sm text-center mt-4">
+				{isLoginMode ? (
+					<>
+						Don’t have an account?{" "}
+						<button
+							type="button"
+							onClick={() => setIsLoginMode(false)}
+							className="text-blue-500 hover:underline"
+						>
+							Sign up
+						</button>
+					</>
+				) : (
+					<>
+						Have an account?{" "}
+						<button
+							type="button"
+							onClick={() => setIsLoginMode(true)}
+							className="text-blue-500 hover:underline"
+						>
+							Log In
+						</button>
+					</>
+				)}
+			</p>
+		</div>
 	);
 };
 

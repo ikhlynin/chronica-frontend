@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import FeedList from "../components/FeedList";
 import { feedService } from "../feed.service";
@@ -6,11 +5,7 @@ import { useFeedStore } from "../feed.store";
 
 const FeedPage = () => {
 	const { setItems } = useFeedStore();
-
-	const { data, isLoading, isError } = useQuery({
-		queryKey: ["feed"],
-		queryFn: () => feedService.getFeed(),
-	});
+	const { data, isLoading, isError } = feedService.useFeedQuery();
 
 	useEffect(() => {
 		if (data) setItems(data);
