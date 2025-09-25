@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Plugin } from "vite";
 
-const modules: string[] = [""];
+const modules: string[] = ["src/modules/ad/prebid/prebid.js"];
 
 const generateModuleImports = (modules: string[]) => {
 	if (!modules || modules.length === 0) return "";

@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import { feedService } from "../feed.service";
+import { useNavigate } from "react-router-dom";
 import type { FeedItemType } from "../feed.types";
 
 interface FeedItemProps {
@@ -7,18 +6,19 @@ interface FeedItemProps {
 }
 
 const FeedItem = ({ item }: FeedItemProps) => {
-	const shortDesc = feedService.getShortDescription(item.description, 120);
-
+	const navigate = useNavigate();
 	return (
-		<Link
-			to={`/news/${item.id}`}
+		<button
+			type="button"
+			onClick={() => navigate(`/article/${encodeURIComponent(item.guid)}`)}
 			className="
-				cursor-pointer flex gap-4 p-4 
-				border border-gray-200 rounded-md 
-				shadow-sm hover:shadow-md 
-				hover:-translate-y-0.5 
-				transition-all duration-200
-			"
+  			  flex gap-4 p-4 
+  			  border border-gray-200 rounded-md 
+  			  shadow-sm hover:shadow-md 
+  			  hover:-translate-y-1 
+  			  transition-transform duration-200
+  			  w-full text-left
+  			"
 		>
 			{item.image && (
 				<img
@@ -29,12 +29,12 @@ const FeedItem = ({ item }: FeedItemProps) => {
 			)}
 			<div className="flex flex-col justify-between">
 				<h3 className="text-lg font-medium text-gray-900">{item.title}</h3>
-				<p className="text-gray-600">{shortDesc}</p>
+				<p className="text-gray-600">{item.contentSnippet}</p>
 				<span className="text-sm text-gray-400">
-					{new Date(item.createdAt).toLocaleString()}
+					{new Date(item.isoDate).toLocaleString()}
 				</span>
 			</div>
-		</Link>
+		</button>
 	);
 };
 

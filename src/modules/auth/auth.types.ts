@@ -7,6 +7,5 @@ export interface User {
 export interface AuthState {
 	accessToken: string | null;
 	isAuth: boolean;
-	setAccessToken: (accessToken: string) => void;
-	logout: () => void;
+	setIsAuth: (isAuthValue: boolean) => void;
 }
