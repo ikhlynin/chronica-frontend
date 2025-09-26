@@ -7,8 +7,8 @@ const AppLayout: React.FC = () => {
 		<div className="flex flex-col min-h-screen">
 			<Header />
 			<main className="flex-1 flex gap-6 p-6">
-				<div className="w-1/6 hidden lg:flex flex-col items-center gap-4">
-					<AdSlot adCode="ad-slot-1" />
+				<div className="hidden lg:flex flex-col items-center gap-4">
+					<AdSlot code="ad-slot-1" />
 				</div>
 				<div className="w-4/6">
 					<Outlet />

@@ -32,7 +32,7 @@ const ArticlePage = () => {
 	if (!article) return <div className="p-6">No article found</div>;
 
 	return (
-		<article className="max-w-3xl mx-auto p-6 text-gray-800">
+		<article className=" mx-auto p-6 text-gray-800">
 			<h1 className="text-3xl font-bold mb-4 leading-tight">{article.title}</h1>
 
 			{article.creator || article.pubDate ? (

@@ -1,7 +1,6 @@
-export const loadPrebid = (): Promise<void> => {
+export const loadPrebid = () => {
 	return new Promise((resolve, reject) => {
-		/* biome-ignore lint: temporary ignore noExplicitAny errors */
-		if ((window as any).pbjs) return resolve();
+		if (window.pbjs) return resolve();
 
 		const script = document.createElement("script");
 		script.src = "/prebid.js";
