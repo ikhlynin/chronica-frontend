@@ -4,9 +4,12 @@ export interface FeedState {
 }
 
 export interface FeedItemType {
-	id: string;
 	title: string;
-	description: string;
 	image: string;
-	createdAt: string;
+	content: string;
+	contentSnippet: string;
+	creator: string;
+	guid: string;
+	isoDate: string;
+	link: string;
 }

@@ -30,6 +30,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
 	const {
 		register,
 		handleSubmit,
+		setError,
 		formState: { errors },
 	} = useForm<FormValues>({
 		resolver: zodResolver(schema),
@@ -42,13 +43,17 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
 			} else {
 				await authService.signup(
 					data.email,
-					data.password,
 					(data as z.infer<typeof signupSchema>).name,
+					data.password,
 				);
 			}
 			navigate("/feed");
 		} catch (error) {
-			console.error(isLogin ? "Login failed" : "Signup failed", error);
+			let message = "Something went wrong";
+			if (error instanceof Error) {
+				message = error.message;
+			}
+			setError("root", { type: "server", message });
 		}
 	};
 
@@ -77,7 +82,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
 				placeholder="Password"
 				error={errors.password?.message}
 			/>
-
+			{errors.root && (
+				<p className="text-red-500 text-sm">{errors.root.message}</p>
+			)}
 			<SubmitButton type="submit">{isLogin ? "Login" : "Signup"}</SubmitButton>
 		</form>
 	);

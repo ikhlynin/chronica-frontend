@@ -2,7 +2,9 @@
 	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
 	"formatter": { "enabled": true },
 	"linter": { "enabled": true, "rules": { "recommended": true } },
-	"files": { "includes": ["src/**/*.{ts,tsx,js,jsx}"] },
+	"files": {
+		"includes": ["src/**/*.{ts,tsx,js,jsx}", "!src/modules/ad/prebid/prebid.js"]
+	},
 	"assist": {
 		"actions": {
 			"source": {

@@ -3,11 +3,10 @@ import FeedItem from "./FeedItem";
 
 const FeedList = () => {
 	const { items } = useFeedStore();
-
 	return (
 		<div className="flex flex-col gap-4">
 			{items.map((item) => (
-				<FeedItem key={item.id} item={item} />
+				<FeedItem key={item.guid} item={item} />
 			))}
 		</div>
 	);

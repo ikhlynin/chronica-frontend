@@ -1,29 +1,49 @@
+import api from "@shared/axios";
 import { useAuthStore } from "./auth.store";
 
 class AuthService {
-	async login(_email: string, _password: string): Promise<string> {
-		const accessToken = this.generateMockToken("access");
-		useAuthStore.getState().setAccessToken(accessToken);
-		return accessToken;
+	async login(email: string, password: string): Promise<void> {
+		try {
+			await api.post("/auth/login", { email, password });
+			useAuthStore.getState().setIsAuth(true);
+			/* biome-ignore lint: temporary ignore noExplicitAny errors */
+		} catch (err: any) {
+			console.error("Login failed:", err.response?.data || err.message);
+			throw new Error(err.response.data.error || "Login failed");
+		}
 	}
 
-	async signup(email: string, name: string, password: string): Promise<string> {
-		console.log("test");
-		return email + name + password;
+	async signup(email: string, name: string, password: string): Promise<void> {
+		try {
+			await api.post("/auth/signup", { email, name, password });
+			useAuthStore.getState().setIsAuth(true);
+			/* biome-ignore lint: temporary ignore noExplicitAny errors */
+		} catch (err: any) {
+			console.error("Signup failed:", err.response?.data || err.message);
+			throw new Error(err.response?.data?.message || "Signup failed");
+		}
 	}
 
-	async refresh(): Promise<string> {
-		const accessToken = this.generateMockToken("refresh");
-		useAuthStore.getState().setAccessToken(accessToken);
-		return accessToken;
+	async refresh(): Promise<void> {
+		try {
+			await api.post("/auth/refresh");
+			useAuthStore.getState().setIsAuth(true);
+			/* biome-ignore lint: temporary ignore noExplicitAny errors */
+		} catch (err: any) {
+			console.error("Refresh failed:", err.response?.data || err.message);
+			throw new Error(err.response?.data?.message || "Refresh failed");
+		}
 	}
 
 	async logout(): Promise<void> {
-		useAuthStore.getState().logout();
-	}
-
-	private generateMockToken(type: "access" | "refresh"): string {
-		return `mock-${type}-token-${Date.now()}`;
+		try {
+			await api.post("/auth/logout");
+			useAuthStore.getState().setIsAuth(false);
+			/* biome-ignore lint: temporary ignore noExplicitAny errors */
+		} catch (err: any) {
+			console.error("Logout failed:", err.response?.data || err.message);
+			throw new Error(err.response?.data?.message || "Logout failed");
+		}
 	}
 }
 

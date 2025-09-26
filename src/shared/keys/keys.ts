@@ -3,5 +3,5 @@ export const ROUTER_KEYS = {
 	ROOT: "/",
 	AUTH: "/auth",
 	FEED: "/feed",
-	NEWS: "/news/:id",
+	ARTICLE: "/article/:guid",
 };
