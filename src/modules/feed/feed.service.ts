@@ -9,11 +9,9 @@ class FeedService {
 		if (force) params.force = "1";
 
 		const res = await api.get("/feed/getFeed", { params });
-		console.log("Feed response:", res);
 		if (!res.data?.items) {
 			throw new Error("Feed response missing items");
 		}
-		console.log("Feed items:", res.data.items);
 		return res.data.items as FeedItemType[];
 	}
 

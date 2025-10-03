@@ -7,7 +7,6 @@ interface FeedItemProps {
 
 const FeedItem = ({ item }: FeedItemProps) => {
 	const navigate = useNavigate();
-	console.log("Rendering FeedItem with item:", item);
 	return (
 		<button
 			type="button"

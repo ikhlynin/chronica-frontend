@@ -7,7 +7,6 @@ export const articleService = {
 			const { data } = await api.get<ArticleType>(`/article/getArticle`, {
 				params: { guid },
 			});
-			console.log(data);
 			return data;
 			/* biome-ignore lint: temporary ignore noExplicitAny errors */
 		} catch (err: any) {
