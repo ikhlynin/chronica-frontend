@@ -3,6 +3,6 @@ export interface ArticleType {
 	content: string;
 	image?: string;
 	creator?: string;
-	pubDate?: string;
-	url: string;
+	isoDate?: string;
+	guid: string;
 }

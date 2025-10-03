@@ -1,8 +1,6 @@
-const virtualModules = () => {
+const virtualModules = (options: { prebidEnabled: boolean }) => {
 	const name = "virtual:modules";
 	const modules: string[] = [];
-	const prebidEnabled = true;
-	// process.env.VITE_PREBID_ENABLED === "true";
 	return {
 		name: "virtual-modules",
 		resolveId(id: string) {
@@ -11,7 +9,7 @@ const virtualModules = () => {
 		},
 		load(id: string) {
 			if (id !== name) return null;
-			if (prebidEnabled) modules.push("ad/prebid/initPrebid");
+			if (options.prebidEnabled) modules.push("ad/prebid/initPrebid");
 
 			const imports = modules
 				.map((m) => `import "/src/modules/${m}.js";`)

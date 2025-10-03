@@ -35,12 +35,12 @@ const ArticlePage = () => {
 		<article className=" mx-auto p-6 text-gray-800">
 			<h1 className="text-3xl font-bold mb-4 leading-tight">{article.title}</h1>
 
-			{article.creator || article.pubDate ? (
+			{article.creator || article.isoDate ? (
 				<div className="text-sm text-gray-500 mb-6">
 					{article.creator && <span>By {article.creator}</span>}
-					{article.creator && article.pubDate && <span> • </span>}
-					{article.pubDate && (
-						<span>{new Date(article.pubDate).toLocaleString()}</span>
+					{article.creator && article.isoDate && <span> • </span>}
+					{article.isoDate && (
+						<span>{new Date(article.isoDate).toLocaleString()}</span>
 					)}
 				</div>
 			) : null}
@@ -61,7 +61,7 @@ const ArticlePage = () => {
 			</div>
 
 			<a
-				href={article.url}
+				href={article.guid}
 				target="_blank"
 				rel="noopener noreferrer"
 				className="inline-block mt-6 text-blue-600 hover:underline"
