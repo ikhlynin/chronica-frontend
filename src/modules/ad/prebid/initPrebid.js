@@ -1,46 +1,103 @@
+import { metricService } from "@modules/metrics/metric.service";
 import { adUnits } from "./adUnits";
 import { loadPrebid } from "./prebidLoader";
 
-console.log("[prebid] module file loaded");
-
 const initPrebid = async () => {
 	await loadPrebid();
-	const pbjs = window.pbjs || {};
+	window.pbjs = window.pbjs || {};
+	const pbjs = window.pbjs;
 	pbjs.que = pbjs.que || [];
+
+	metricService.sendEvent({
+		event: "adLoad",
+		timestamp: new Date().toISOString(),
+		pageUrl: window.location.href,
+	});
+
+	pbjs.onEvent("auctionInit", (_data) => {
+		metricService.sendEvent({
+			event: "auctionInit",
+			timestamp: new Date().toISOString(),
+			pageUrl: window.location.href,
+		});
+	});
+
+	pbjs.onEvent("bidRequested", (data) => {
+		metricService.sendEvent({
+			event: "bidRequested",
+			timestamp: new Date().toISOString(),
+			pageUrl: window.location.href,
+			adapter: data?.bidderCode,
+		});
+	});
+
+	pbjs.onEvent("bidResponse", (bid) => {
+		metricService.sendEvent({
+			event: "bidResponse",
+			timestamp: new Date().toISOString(),
+			pageUrl: window.location.href,
+			adId: bid?.adId,
+			creativeId: bid?.creativeId,
+			cpm: bid?.cpm,
+			adapter: bid?.bidder,
+		});
+	});
+
+	pbjs.onEvent("auctionEnd", (_data) => {
+		metricService.sendEvent({
+			event: "auctionEnd",
+			timestamp: new Date().toISOString(),
+			pageUrl: window.location.href,
+		});
+	});
+
+	pbjs.onEvent("bidWon", (bid) => {
+		metricService.sendEvent({
+			event: "bidWon",
+			timestamp: new Date().toISOString(),
+			pageUrl: window.location.href,
+			adId: bid?.adId,
+			creativeId: bid?.creativeId,
+			cpm: bid?.cpm,
+			adapter: bid?.bidder,
+		});
+	});
 
 	const renderWinningBids = (adUnitCode, expectedType = "banner") => {
 		const winners = pbjs.getHighestCpmBids(adUnitCode);
 
-		for (const bid of winners) {
+		winners.forEach((bid) => {
 			if (bid.mediaType === expectedType) {
 				const iframe = document.getElementById(bid.adUnitCode);
-				if (iframe?.contentWindow) {
-					const doc = iframe.contentWindow.document;
-					pbjs.renderAd(doc, bid.adId);
+				if (iframe) {
+					const doc = iframe.contentDocument || iframe.contentWindow?.document;
+					if (doc) {
+						doc.open();
+						doc.write(bid.ad);
+						doc.close();
+					} else {
+						console.warn("Iframe document not ready for", bid.adUnitCode);
+					}
+				} else {
+					console.warn("Iframe not found for", bid.adUnitCode);
 				}
 			}
-		}
+		});
 	};
 
 	const requestBids = () => {
 		pbjs.requestBids({
-			timeout: 1500,
+			timeout: 2500,
 			bidsBackHandler: () => {
-				for (const adUnit of adUnits) {
+				adUnits.forEach((adUnit) => {
 					renderWinningBids(adUnit.code, "banner");
-				}
+				});
 			},
 		});
 	};
 
 	pbjs.que.push(() => {
-		pbjs.addAdUnits(
-			adUnits.map((adUnit) => ({
-				code: adUnit.code,
-				mediaTypes: { banner: { sizes: adUnit.sizes } },
-				bids: [{ bidder: adUnit.bidder, params: adUnit.params }],
-			})),
-		);
+		pbjs.addAdUnits(adUnits);
 		requestBids();
 	});
 };

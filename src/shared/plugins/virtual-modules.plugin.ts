@@ -1,8 +1,6 @@
-const virtualModules = () => {
+const virtualModules = (prebidEnabled: boolean) => {
 	const name = "virtual:modules";
 	const modules: string[] = [];
-	const prebidEnabled = true;
-	// process.env.VITE_PREBID_ENABLED === "true";
 	return {
 		name: "virtual-modules",
 		resolveId(id: string) {
