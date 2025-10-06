@@ -17,9 +17,8 @@ const ArticlePage = () => {
 			try {
 				const data = await articleService.fetchArticle(guid);
 				setArticle(data);
-				/* biome-ignore lint: temporary ignore noExplicitAny errors */
-			} catch (err: any) {
-				setError(err.message);
+			} catch (err: unknown) {
+				setError((err as Error)?.message);
 			} finally {
 				setLoading(false);
 			}

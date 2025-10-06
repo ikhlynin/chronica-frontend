@@ -1,14 +1,5 @@
-export type MetricEvent =
-	| "pageLoad"
-	| "adLoad"
-	| "auctionInit"
-	| "auctionEnd"
-	| "bidRequested"
-	| "bidResponse"
-	| "bidWon";
-
 export interface MetricPayload {
-	event: MetricEvent;
+	event?: string;
 	timestamp: string;
 	pageUrl: string;
 	userId?: string;
@@ -26,6 +17,12 @@ export interface FilterOptions {
 	hour?: number;
 }
 
-export type MetricGridRow = MetricPayload & {
-	id: string;
-};
+export interface MetricFiltersProps {
+	filter: FilterOptions;
+	onChange: (next: FilterOptions) => void;
+	events: string[];
+	adapters: string[];
+	creativeIds: string[];
+}
+
+export type MetricGridRow = MetricPayload & { id: string };

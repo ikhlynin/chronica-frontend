@@ -24,10 +24,9 @@ Chronica — a news aggregator providing an easy interface for browsing and filt
 5. **Preview the production build locally:**
 `yarn preview`
 
-## Technologies
-
-- React + TypeScript
-- Vite
-- Zustand (state management)
-- React Hook Form + Zod (form validation)
-- TailwindCSS (styling)
+## Enviroments:
+``` Bash
+VITE_PREBID_ENABLED
+VITE_API_BASE_URL
+VITE_SENTRY_DSN
+```

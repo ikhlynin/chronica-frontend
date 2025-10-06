@@ -17,6 +17,11 @@ const UserMenu = () => {
 		navigate("/metrics");
 	};
 
+	const goToForm = () => {
+		setIsOpen(false);
+		window.location.href = `${import.meta.env.VITE_API_BASE_URL}/lineItem/getForm`;
+	};
+
 	return (
 		<div className="relative">
 			<button
@@ -29,6 +34,13 @@ const UserMenu = () => {
 
 			{isOpen && (
 				<div className="absolute right-0 mt-2 w-36 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden transition-all duration-200">
+					<button
+						type="button"
+						onClick={goToForm}
+						className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
+					>
+						Form
+					</button>
 					<button
 						type="button"
 						onClick={goToMetrics}

@@ -1,4 +1,4 @@
-const virtualModules = (options: { prebidEnabled: boolean }) => {
+const virtualModules = (prebidEnabled: boolean) => {
 	const name = "virtual:modules";
 	const modules: string[] = [];
 	return {
@@ -9,7 +9,7 @@ const virtualModules = (options: { prebidEnabled: boolean }) => {
 		},
 		load(id: string) {
 			if (id !== name) return null;
-			if (options.prebidEnabled) modules.push("ad/prebid/initPrebid");
+			if (prebidEnabled) modules.push("ad/prebid/initPrebid");
 
 			const imports = modules
 				.map((m) => `import "/src/modules/${m}.js";`)

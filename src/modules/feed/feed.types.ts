@@ -5,11 +5,10 @@ export interface FeedState {
 
 export interface FeedItemType {
 	title: string;
-	image: string;
+	link?: string;
+	guid: string;
 	content: string;
 	contentSnippet: string;
-	creator: string;
-	guid: string;
 	isoDate: string;
-	link: string;
+	image?: string;
 }

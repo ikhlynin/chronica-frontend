@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       tailwindcss(),
-      virtualModules({ prebidEnabled }),
+      virtualModules(prebidEnabled),
     ],
     resolve: {
       alias: {

@@ -9,10 +9,11 @@ class FeedService {
 		if (force) params.force = "1";
 
 		const res = await api.get("/feed/getFeed", { params });
-		if (!res.data?.items) {
+		const items = res.data.items;
+		if (!items) {
 			throw new Error("Feed response missing items");
 		}
-		return res.data.items as FeedItemType[];
+		return items;
 	}
 
 	useFeedQuery(url?: string, force = false) {
@@ -20,7 +21,6 @@ class FeedService {
 			queryKey: ["feed", url, force],
 			queryFn: () => this.getFeed(url, force),
 			staleTime: 1000 * 60 * 5,
-			retry: 3,
 		});
 	}
 }
